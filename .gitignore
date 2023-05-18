@@ -1,0 +1,6 @@
+**/.gradle
+**/.idea/artifacts
+**/.idea/modules
+**/.idea/**.xml
+**/build
+**.hprof
