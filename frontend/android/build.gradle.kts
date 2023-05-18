@@ -4,7 +4,7 @@ plugins {
     kotlin("android")
 }
 
-group = "com.weesnerDevelopment"
+group = "com.weesnerDevelopment.lavalamp"
 version = "1.0-SNAPSHOT"
 
 repositories {

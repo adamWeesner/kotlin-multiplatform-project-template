@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "com.weesnerDevelopment"
+group = "com.weesnerDevelopment.lavalamp"
 version = "1.0-SNAPSHOT"
 
 

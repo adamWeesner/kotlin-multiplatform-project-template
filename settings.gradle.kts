@@ -20,6 +20,7 @@ rootProject.name = "lavalamp"
 include(
     ":frontend:android",
     ":frontend:desktop",
+    ":frontend:terminal",
     ":frontend:common",
 
     ":common:sdk"
