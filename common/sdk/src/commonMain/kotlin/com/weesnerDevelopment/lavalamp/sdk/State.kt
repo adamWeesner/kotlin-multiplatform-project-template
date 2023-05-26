@@ -1,6 +1,6 @@
 package com.weesnerDevelopment.lavalamp.sdk
 
-// circle back on historical/check in time and feelings for checkin
+// circle back on historical/check in time and feelings for check-in
 sealed interface State {
     val feelings: List<Feeling>
     val notes: String

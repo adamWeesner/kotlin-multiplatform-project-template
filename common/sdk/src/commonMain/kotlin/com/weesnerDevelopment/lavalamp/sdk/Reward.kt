@@ -44,6 +44,9 @@ data class RewardCategory(
     override val lastUpdatedDate: String,
 ) : Item.Named
 
+// rewards in the reward pool are isolated from the rewards backend, theyre their own thing, so
+// modifications to the rewards (not in the reward pool) do not cause changes to the ones in the
+// pool
 data class RewardPool(
     val all: List<Reward>,
     val redeemable: Redeemable<Reward.Usable>,

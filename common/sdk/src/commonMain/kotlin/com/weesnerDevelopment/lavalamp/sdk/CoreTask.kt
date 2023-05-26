@@ -51,10 +51,3 @@ data class Checklist(
         val name: String
     }
 }
-
-// reoccuring tasks???
-
-
-// be able to see the data however you want, based on things like "priority", "projects"
-// every so often, check in -- app in general setting
-// receipt upload
