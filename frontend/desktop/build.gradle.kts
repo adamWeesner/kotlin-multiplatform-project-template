@@ -1,28 +1,22 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    kotlin("multiplatform")
+    kotlin("jvm")
     id("org.jetbrains.compose")
 }
 
 group = "com.weesnerDevelopment.lavalamp.desktop"
 version = "1.0.0"
 
-kotlin {
-    jvm {
-        jvmToolchain(17)
-        withJava()
-    }
-    sourceSets {
-        val jvmMain by getting {
-            dependencies {
-                implementation(project(":frontend:common"))
-                implementation(project(":frontend:navigation"))
-                implementation(compose.desktop.currentOs)
-            }
-        }
-        val jvmTest by getting
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    implementation(project(":frontend:common"))
+    implementation(project(":frontend:navigation"))
+    implementation(compose.desktop.currentOs)
 }
 
 compose.desktop {

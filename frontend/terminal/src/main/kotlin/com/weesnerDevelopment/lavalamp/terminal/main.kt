@@ -14,9 +14,7 @@ import kotlin.system.exitProcess
 
 internal val onlyDispatcher = Dispatchers.Unconfined
 
-fun main(args: Array<String>) {
-    Program().main(args)
-}
+fun main(args: Array<String>) = Program().main(args)
 
 class Program : CliktCommand() {
     private val lifecycle = LifecycleRegistry()

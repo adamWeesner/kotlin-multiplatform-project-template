@@ -1,9 +1,19 @@
 plugins {
     kotlin("jvm")
+    id("application")
 }
 
 group = "com.weesnerDevelopment.lavalamp.terminal"
 version = "1.0-SNAPSHOT"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    mainClass.set("com.weesnerDevelopment.lavalamp.terminal.MainKt")
+}
 
 dependencies {
     implementation(libs.kotlin.coroutines.core)
