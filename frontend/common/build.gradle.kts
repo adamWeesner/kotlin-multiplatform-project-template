@@ -4,7 +4,7 @@ plugins {
     id("com.android.library")
 }
 
-group = "com.weesnerDevelopment.lavalamp"
+group = "com.weesnerDevelopment.lavalamp.frontend.common"
 version = "1.0-SNAPSHOT"
 
 kotlin {
@@ -46,13 +46,19 @@ kotlin {
         val desktopTest by getting
     }
 }
-
 android {
-    compileSdkVersion(33)
+    namespace = group.toString()
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(33)
+        minSdk = 24
+        targetSdk = 33
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

@@ -17,3 +17,24 @@ plugins {
     id("com.android.library") apply false
     id("org.jetbrains.compose") apply false
 }
+
+subprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_17.majorVersion
+        }
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "org.jetbrains.kotlin") {
+                useVersion(extra["kotlin.version"] as String)
+            }
+            if (requested.group == "org.jetbrains.kotlinx" && requested.name.startsWith("kotlinx-coroutines")) {
+                useVersion(libs.versions.kotlin.get())
+            }
+        }
+    }
+}

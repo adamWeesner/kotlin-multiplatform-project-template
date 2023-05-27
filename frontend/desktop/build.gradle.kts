@@ -5,9 +5,8 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "com.weesnerDevelopment.lavalamp"
-version = "1.0-SNAPSHOT"
-
+group = "com.weesnerDevelopment.lavalamp.desktop"
+version = "1.0.0"
 
 kotlin {
     jvm {
@@ -18,6 +17,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":frontend:common"))
+                implementation(project(":frontend:navigation"))
                 implementation(compose.desktop.currentOs)
             }
         }
@@ -27,11 +27,12 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "com.weesnerDevelopment.lavalamp.desktop.MainKt"
+
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "lavalamp"
-            packageVersion = "1.0.0"
+            packageVersion = version.toString()
         }
     }
 }

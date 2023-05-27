@@ -4,26 +4,34 @@ plugins {
     kotlin("android")
 }
 
-group = "com.weesnerDevelopment.lavalamp"
+group = "com.weesnerDevelopment.lavalamp.android"
 version = "1.0-SNAPSHOT"
-
-repositories {
-    jcenter()
-}
 
 dependencies {
     implementation(project(":frontend:common"))
+    implementation(project(":frontend:navigation"))
     implementation("androidx.activity:activity-compose:1.5.0")
 }
 
 android {
-    compileSdkVersion(33)
+    namespace = group.toString()
+    compileSdk = 33
     defaultConfig {
-        applicationId = "com.weesnerDevelopment.android"
-        minSdkVersion(24)
-        targetSdkVersion(33)
+        applicationId = group.toString()
+        multiDexEnabled = true
+        minSdk = 24
+        targetSdk = 33
         versionCode = 1
-        versionName = "1.0-SNAPSHOT"
+        versionName = version.toString()
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+    }
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -33,5 +41,10 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+    packagingOptions {
+        pickFirst("META-INF/AL2.0")
+        pickFirst("META-INF/LGPL2.0")
+        pickFirst("META-INF/LGPL2.1")
     }
 }

@@ -1,11 +1,9 @@
-import org.jetbrains.compose.compose
-
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
 }
 
-group = "com.weesnerDevelopment.lavalamp"
+group = "com.weesnerDevelopment.lavalamp.common.sdk"
 version = "1.0-SNAPSHOT"
 
 kotlin {
@@ -32,11 +30,12 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(33)
+    namespace = group.toString()
+    compileSdk = 33
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(33)
+        minSdk = 24
+        targetSdk = 33
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

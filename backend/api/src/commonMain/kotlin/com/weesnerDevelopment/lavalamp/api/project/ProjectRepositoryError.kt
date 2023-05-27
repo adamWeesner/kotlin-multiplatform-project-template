@@ -1,4 +1,4 @@
-package com.weesnerDevelopment.lavalamp.api
+package com.weesnerDevelopment.lavalamp.api.project
 
 sealed interface ProjectRepositoryError {
     sealed interface GetAll {

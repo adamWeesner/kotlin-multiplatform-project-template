@@ -1,4 +1,4 @@
-package com.weesnerDevelopment.lavalamp.api
+package com.weesnerDevelopment.lavalamp.api.project
 
 import com.weesnerDevelopment.lavalamp.sdk.Either
 import com.weesnerDevelopment.lavalamp.sdk.Project
