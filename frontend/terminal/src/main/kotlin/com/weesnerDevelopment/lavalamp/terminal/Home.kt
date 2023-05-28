@@ -1,5 +1,6 @@
 package com.weesnerDevelopment.lavalamp.terminal
 
+import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.prompt
 import com.github.ajalt.clikt.parameters.types.choice
@@ -8,7 +9,7 @@ import com.weesnerDevelopment.lavalamp.ui.home.HomeComponent
 class Home(
     private val component: HomeComponent,
     private val onOptionSelected: (StartingOption) -> Unit
-) : SuspendingCliktCommand() {
+) : CliktCommand() {
     sealed class StartingOption(
         val name: String
     ) {
@@ -37,7 +38,7 @@ class Home(
         .choice(choices = choices)
         .prompt("${choicesList}\nWhat would you like to do?")
 
-    override suspend fun suspendRun() {
+    override fun run() {
         onOptionSelected(action)
     }
 }

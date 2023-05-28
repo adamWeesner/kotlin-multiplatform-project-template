@@ -15,6 +15,7 @@ java {
 
 dependencies {
     implementation(project(":frontend:common"))
+    implementation(project(":frontend:compose:core"))
     implementation(project(":frontend:navigation"))
     implementation(compose.desktop.currentOs)
 }

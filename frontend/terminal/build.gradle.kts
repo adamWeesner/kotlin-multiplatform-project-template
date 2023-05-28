@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    id("application")
+    application
 }
 
 group = "com.weesnerDevelopment.lavalamp.terminal"

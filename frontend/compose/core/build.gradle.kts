@@ -1,29 +1,25 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
     id("org.jetbrains.compose")
-    id("kotlin-parcelize")
+    id("com.android.library")
 }
 
-group = "com.weesnerDevelopment.lavalamp.frontend.navigation"
+group = "com.weesnerDevelopment.lavalamp.frontend.compose.core"
 version = "1.0-SNAPSHOT"
 
 kotlin {
     android()
-    jvm("desktop")
+    jvm("desktop") {
+        jvmToolchain(17)
+    }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.decompose)
-                api(libs.decompose.jetbrains)
-                implementation(libs.kotlin.coroutines.core)
-                implementation(project(":common:sdk"))
-                implementation(project(":backend:api"))
-                implementation(project(":frontend:common"))
-                implementation(project(":frontend:compose:core"))
-                implementation(project(":frontend:ui:home"))
-                implementation(project(":frontend:ui:createProject"))
-                implementation(project(":frontend:ui:projectDetails"))
+                api(compose.runtime)
+                api(compose.foundation)
+                api(compose.material)
+                api(project(":backend:api"))
+                api(project(":common:sdk"))
             }
         }
         val commonTest by getting {
@@ -31,17 +27,25 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                api("androidx.appcompat:appcompat:1.5.1")
+                api("androidx.core:core-ktx:1.9.0")
+            }
+        }
         val androidUnitTest by getting {
             dependencies {
                 implementation("junit:junit:4.13.2")
             }
         }
-        val desktopMain by getting
+        val desktopMain by getting {
+            dependencies {
+                api(compose.preview)
+            }
+        }
         val desktopTest by getting
     }
 }
-
 android {
     namespace = group.toString()
     compileSdk = 33

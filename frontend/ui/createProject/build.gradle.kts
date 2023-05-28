@@ -13,8 +13,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":backend:api"))
-                api(project(":frontend:common"))
+                implementation(project(":backend:api"))
+                implementation(project(":frontend:common"))
+                implementation(project(":frontend:compose:core"))
                 implementation(libs.decompose)
                 implementation(libs.decompose.jetbrains)
                 implementation(libs.kotlin.coroutines.core)
@@ -25,12 +26,7 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                api("androidx.appcompat:appcompat:1.5.1")
-                api("androidx.core:core-ktx:1.9.0")
-            }
-        }
+        val androidMain by getting
         val androidUnitTest by getting {
             dependencies {
                 implementation("junit:junit:4.13.2")

@@ -5,5 +5,3 @@ enum class Platform {
     Terminal,
     Android,
 }
-
-expect fun getPlatformName(): String

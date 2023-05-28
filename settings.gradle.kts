@@ -64,9 +64,14 @@ include(
     ":frontend:android",
     ":frontend:desktop",
     ":frontend:terminal",
+
     // shared frontend
     ":frontend:common",
     ":frontend:navigation",
+
+    // compose frontend things
+    ":frontend:compose:core",
+
     // frontend uis the actual impls of things like "screens"
     ":frontend:ui:home",
     ":frontend:ui:createProject",
