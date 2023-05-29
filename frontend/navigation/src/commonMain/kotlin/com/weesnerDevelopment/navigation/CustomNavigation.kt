@@ -1,5 +1,7 @@
 package com.weesnerDevelopment.navigation
 
+import com.arkivanov.decompose.router.slot.SlotNavigation
+import com.arkivanov.decompose.router.slot.SlotNavigationSource
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.StackNavigationSource
 
@@ -7,7 +9,7 @@ import com.arkivanov.decompose.router.stack.StackNavigationSource
  * Custom navigation based on [StackNavigation] with the main thread limitations. This should only
  * be used for frontends that do not have a "main thread" i.e.: Terminal programs.
  */
-internal class CustomStackNavigation<C : Any> : StackNavigation<C> {
+class CustomStackNavigation<C : Any> : StackNavigation<C> {
     private val relay = Relay<StackNavigationSource.Event<C>>()
 
     override fun navigate(
@@ -26,6 +28,24 @@ internal class CustomStackNavigation<C : Any> : StackNavigation<C> {
     }
 }
 
+class CustomSlotNavigation<C: Any>: SlotNavigation<C> {
+    private val relay = Relay<SlotNavigationSource.Event<C>>()
+
+    override fun navigate(
+        transformer: (configuration: C?) -> C?,
+        onComplete: (newConfiguration: C?, oldConfiguration: C?) -> Unit,
+    ) {
+        relay.accept(SlotNavigationSource.Event(transformer, onComplete))
+    }
+
+    override fun subscribe(observer: (SlotNavigationSource.Event<C>) -> Unit) {
+        relay.subscribe(observer)
+    }
+
+    override fun unsubscribe(observer: (SlotNavigationSource.Event<C>) -> Unit) {
+        relay.unsubscribe(observer)
+    }
+}
 
 private class Lock
 

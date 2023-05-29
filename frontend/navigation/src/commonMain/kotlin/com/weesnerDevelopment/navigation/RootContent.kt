@@ -1,7 +1,6 @@
 package com.weesnerDevelopment.navigation
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -12,16 +11,40 @@ import com.weesnerDevelopment.lavalamp.ui.createProject.CreateProject
 import com.weesnerDevelopment.lavalamp.ui.home.Home
 import com.weesnerDevelopment.lavalamp.ui.projectDetails.ProjectDetails
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RootContent(
     rootComponent: RootComponent,
     modifier: Modifier = Modifier
 ) {
-    val stack by rootComponent.stack.subscribeAsState()
+    val screenStack by rootComponent.screenStack.subscribeAsState()
+    val dialogSlot by rootComponent.dialogSlot.subscribeAsState()
+    val drawerSlot by rootComponent.drawerSlot.subscribeAsState()
+    val bottomSheetSlot by rootComponent.bottomSheetSlot.subscribeAsState()
 
-    Surface(color = MaterialTheme.colors.background, modifier = modifier) {
+    BottomSheetScaffold(
+        scaffoldState = rememberBottomSheetScaffoldState(),
+        sheetContent = {
+            when (bottomSheetSlot.child?.instance) {
+                Child.SampleForBottomSheet -> TODO()
+                null -> {} /* left blank intentionally, we dont wanna do anything if we dont have a thing in there */
+            }
+        },
+        drawerContent = {
+            when (drawerSlot.child?.instance) {
+                Child.SampleForDrawer -> TODO()
+                null -> {} /* left blank intentionally, we dont wanna do anything if we dont have a thing in there */
+            }
+        }
+    ) {
+        when (dialogSlot.child?.instance) {
+            Child.SampleForDialog -> TODO()
+            null -> {} /* left blank intentionally, we dont wanna do anything if we dont have a thing in there */
+
+        }
+
         Children(
-            stack = stack,
+            stack = screenStack,
             animation = stackAnimation()
         ) { child ->
             when (val current = child.instance) {

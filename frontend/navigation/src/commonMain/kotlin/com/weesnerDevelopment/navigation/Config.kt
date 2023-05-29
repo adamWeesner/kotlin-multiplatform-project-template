@@ -8,13 +8,30 @@ import com.arkivanov.essenty.parcelable.Parcelize
  */
 sealed class Config : Parcelable {
     @Parcelize
-    object Home : Config()
+    object Home : ScreenConfig()
 
     @Parcelize
-    object CreateProject : Config()
+    object CreateProject : ScreenConfig()
 
     @Parcelize
     data class ProjectDetails(
         val projectId: String
-    ) : Config()
+    ) : ScreenConfig()
+
+    // todo remove once we get a dialog
+    @Parcelize
+    object SampleForDialog: DialogConfig()
+
+    // todo remove once we get a bottom sheet
+    @Parcelize
+    object SampleForBottomSheet: BottomSheetConfig()
+
+    // todo remove once we get a drawer
+    @Parcelize
+    object SampleForDrawer: DrawerConfig()
 }
+
+sealed class ScreenConfig : Config()
+sealed class DialogConfig : Config()
+sealed class BottomSheetConfig : Config()
+sealed class DrawerConfig : Config()

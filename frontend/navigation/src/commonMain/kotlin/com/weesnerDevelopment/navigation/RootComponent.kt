@@ -1,21 +1,21 @@
 package com.weesnerDevelopment.navigation
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.router.slot.ChildSlot
+import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.bringToFront
-import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.value.Value
 import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
-import com.weesnerDevelopment.lavalamp.ui.createProject.DefaultCreateProjectComponent
-import com.weesnerDevelopment.lavalamp.ui.home.DefaultHomeComponent
-import com.weesnerDevelopment.lavalamp.ui.projectDetails.DefaultProjectDetailsComponent
 import kotlin.coroutines.CoroutineContext
 
 interface RootComponent {
-    val stack: Value<ChildStack<*, Child>>
+    val screenStack: Value<ChildStack<ScreenConfig, Child.Screen>>
+    val dialogSlot: Value<ChildSlot<DialogConfig, Child.Dialog>>
+    val bottomSheetSlot: Value<ChildSlot<BottomSheetConfig, Child.BottomSheet>>
+    val drawerSlot: Value<ChildSlot<DrawerConfig, Child.Drawer>>
 }
 
 class DefaultRootComponent(
@@ -25,79 +25,99 @@ class DefaultRootComponent(
     private val coroutineContext: CoroutineContext,
     private val navContext: CoroutineContext,
 ) : RootComponent, ComponentContext by componentContext {
-    private val navigation: StackNavigation<Config> = when (platform) {
-        Platform.Terminal -> CustomStackNavigation()
-        Platform.Desktop, Platform.Android -> StackNavigation()
-    }
-
-    private val _childStack = childStack(
-        source = navigation,
-        initialConfiguration = Config.Home,
-        handleBackButton = true,
-        childFactory = ::createChild
+    private val screenNav: StackNav<ScreenConfig, Child.Screen> = setupStackNav(
+        platform = platform,
+        initial = listOf(Config.Home),
+        factory = { config, context ->
+            createChildScreen(
+                config = config,
+                componentContext = context,
+                coroutineContext = coroutineContext,
+                navContext = navContext,
+                projectRepository = projectRepository,
+                dialogNav = dialogSlotNav,
+                bottomSheetNav = bottomSheetSlotNav,
+                drawerNav = drawerSlotNav,
+                bringToFront = ::bringToFront,
+                back = ::back
+            )
+        }
     )
 
-    override val stack: Value<ChildStack<Config, Child>> = _childStack
+    override val screenStack: Value<ChildStack<ScreenConfig, Child.Screen>> = screenNav.stack
 
-    private fun createChild(
-        config: Config,
-        componentContext: ComponentContext
-    ): Child = when (config) {
-        Config.Home ->
-            Child.Home(
-                DefaultHomeComponent(
-                    componentContext = componentContext,
-                    coroutineContext = coroutineContext,
-                    projectRepository = projectRepository,
-                    onCreateProject = {
-                        navigation.bringToFront(Config.CreateProject)
-                    },
-                    onProjectDetails = { projectId ->
-                        navigation.bringToFront(Config.ProjectDetails(projectId))
-                    }
-                )
+    private val dialogSlotNav: SlotNav<DialogConfig, Child.Dialog> = setupSlotNav(
+        platform = platform,
+        factory = { config, context ->
+            createChildDialog(
+                config = config,
+                componentContext = context,
+                coroutineContext = coroutineContext,
+                navContext = navContext,
+                projectRepository = projectRepository,
+                screenNav = screenNav,
+                bottomSheetNav = bottomSheetSlotNav,
+                drawerNav = drawerSlotNav,
             )
+        }
+    )
 
-        Config.CreateProject ->
-            Child.CreateProject(
-                DefaultCreateProjectComponent(
-                    componentContext = componentContext,
-                    coroutineContext = coroutineContext,
-                    navContext = navContext,
-                    projectRepository = projectRepository,
-                    onCreateSuccess = {
-                        navigation.pop()
-                    },
-                    onCreateFailed = {
-                        // todo need to show dialog or something here
-                        navigation.pop()
-                    }
-                )
-            )
+    override val dialogSlot: Value<ChildSlot<DialogConfig, Child.Dialog>> = dialogSlotNav.slot
 
-        is Config.ProjectDetails ->
-            Child.ProjectDetails(
-                DefaultProjectDetailsComponent(
-                    componentContext = componentContext,
-                    coroutineContext = coroutineContext,
-                    navContext = navContext,
-                    projectRepository = projectRepository,
-                    projectId = config.projectId,
-                    onGetFail = {
-                        // todo need to show a dialog or something here
-                        navigation.pop()
-                    },
-                    onProjectDeleteSuccess = {
-                        navigation.pop()
-                    },
-                    onProjectDeleteFail = {
-                        // todo need to show a dialog or something here
-                        navigation.pop()
-                    },
-                    onBack = {
-                        navigation.pop()
-                    }
-                )
+    private val bottomSheetSlotNav: SlotNav<BottomSheetConfig, Child.BottomSheet> = setupSlotNav(
+        platform = platform,
+        factory = { config, context ->
+            createChildBottomSheet(
+                config = config,
+                componentContext = context,
+                coroutineContext = coroutineContext,
+                navContext = navContext,
+                projectRepository = projectRepository,
+                screenNav = screenNav,
+                dialogNav = dialogSlotNav,
+                drawerNav = drawerSlotNav,
             )
+        }
+    )
+
+    override val bottomSheetSlot: Value<ChildSlot<BottomSheetConfig, Child.BottomSheet>> =
+        bottomSheetSlotNav.slot
+
+    private val drawerSlotNav: SlotNav<DrawerConfig, Child.Drawer> = setupSlotNav(
+        platform = platform,
+        factory = { config, context ->
+            createChildDrawer(
+                config = config,
+                componentContext = context,
+                coroutineContext = coroutineContext,
+                navContext = navContext,
+                projectRepository = projectRepository,
+                screenNav = screenNav,
+                dialogNav = dialogSlotNav,
+                bottomSheetNav = bottomSheetSlotNav,
+            )
+        }
+    )
+
+    override val drawerSlot: Value<ChildSlot<DrawerConfig, Child.Drawer>> = drawerSlotNav.slot
+
+    /**
+     * Clears slot stacks when navigating between screens
+     */
+    private fun bringToFront(item: ScreenConfig) {
+        screenNav.navigator.bringToFront(item)
+        dialogSlotNav.navigator.dismiss()
+        bottomSheetSlotNav.navigator.dismiss()
+        drawerSlotNav.navigator.dismiss()
+    }
+
+    /**
+     * Clears slot stacks when popping screens
+     */
+    private fun back() {
+        screenNav.navigator.pop()
+        dialogSlotNav.navigator.dismiss()
+        bottomSheetSlotNav.navigator.dismiss()
+        drawerSlotNav.navigator.dismiss()
     }
 }

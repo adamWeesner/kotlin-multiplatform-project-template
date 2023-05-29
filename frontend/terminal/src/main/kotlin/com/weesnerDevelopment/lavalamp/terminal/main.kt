@@ -43,8 +43,8 @@ fun RootContent(
     programArgs: List<String>,
     projectRepo: ProjectRepository,
     component: RootComponent
-) {
-    component.stack.subscribe {
+) = with(component) {
+    screenStack.subscribe {
         val command = when (val current = it.active.instance) {
             is Child.Home -> Home(
                 component = current.component,
@@ -75,5 +75,41 @@ fun RootContent(
         }
 
         command.main(programArgs)
+    }
+
+    dialogSlot.subscribe {
+        val command = when (val current = it.child?.instance) {
+            Child.SampleForDialog -> object : CliktCommand() {
+                override fun run() {}
+            }
+
+            null -> null
+        }
+
+        command?.main(programArgs)
+    }
+
+    bottomSheetSlot.subscribe {
+        val command = when (val current = it.child?.instance) {
+            Child.SampleForBottomSheet -> object : CliktCommand() {
+                override fun run() {}
+            }
+
+            null -> null
+        }
+
+        command?.main(programArgs)
+    }
+
+    drawerSlot.subscribe {
+        val command = when (val current = it.child?.instance) {
+            Child.SampleForDrawer -> object : CliktCommand() {
+                override fun run() {}
+            }
+
+            null -> null
+        }
+
+        command?.main(programArgs)
     }
 }

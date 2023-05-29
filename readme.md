@@ -13,26 +13,26 @@ module noted above.
 After adding a screen/dialog/etc you need to wire it up in a few places:
 
 - add a new element to
-  the [Child](frontend/navigation/src/commonMain/kotlin/com/weesnerDevelopment/navigation/Child.kt)
+  the [Child](frontend/navigation/src/commonMain/kotlin/com/weesnerDevelopment/navigation/Child.kt) with its respective type
 
 ```kotlin
-class MyNewUi(val component: MyNewUisComponent) : Child
+class MyNewUi(val component: MyNewUisComponent) : Child.Screen
 ```
 
 - add a new element to
-  the [Config](frontend/navigation/src/commonMain/kotlin/com/weesnerDevelopment/navigation/Config.kt)
+  the [Config](frontend/navigation/src/commonMain/kotlin/com/weesnerDevelopment/navigation/Config.kt) with its respective type
 
 ```kotlin
 // needs to be parcelable so that state can be saved internally
 @Parcelize
 data class MyNewUi(
     // any args...
-) : Config()
+) : ScreenConfig()
 ```
 
 - in
-  the [RootComponent](frontend/navigation/src/commonMain/kotlin/com/weesnerDevelopment/navigation/RootComponent.kt)
-  inside the `createChild` function add:
+  the [RootComponent](frontend/navigation/src/commonMain/kotlin/com/weesnerDevelopment/navigation/RootComponent.kt)s
+  inside the `createChild{Screen|Dialog|BottomSheet|Drawer}` function add:
 
 ```kotlin
 Child.MyNewUi(
