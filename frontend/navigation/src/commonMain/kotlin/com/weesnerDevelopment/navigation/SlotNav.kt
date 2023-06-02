@@ -13,6 +13,7 @@ class SlotNav<T : Config, C : Child>(
 )
 
 inline fun <reified T : Config, reified C : Child> ComponentContext.setupSlotNav(
+    key: String,
     platform: Platform,
     initial: T? = null,
     noinline factory: (T, ComponentContext) -> C
@@ -23,6 +24,7 @@ inline fun <reified T : Config, reified C : Child> ComponentContext.setupSlotNav
     }
 
     val childStack = childSlot<T, C>(
+        key = key,
         source = navigator,
         initialConfiguration = { initial },
         handleBackButton = true,

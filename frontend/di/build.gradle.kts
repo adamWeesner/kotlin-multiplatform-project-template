@@ -1,11 +1,9 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("org.jetbrains.compose")
-    id("kotlin-parcelize")
 }
 
-group = "com.weesnerDevelopment.lavalamp.frontend.navigation"
+group = "com.weesnerDevelopment.lavalamp.frontend.di"
 version = "1.0-SNAPSHOT"
 
 kotlin {
@@ -14,14 +12,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(libs.decompose)
+                api(libs.kodein)
                 api(libs.decompose.jetbrains)
                 implementation(libs.kotlin.coroutines.core)
-                implementation(libs.kodein)
-                implementation(project(":common:sdk"))
                 implementation(project(":backend:api"))
                 implementation(project(":frontend:common"))
-                implementation(project(":frontend:compose:core"))
+                implementation(project(":frontend:navigation"))
                 implementation(project(":frontend:ui:home"))
                 implementation(project(":frontend:ui:createProject"))
                 implementation(project(":frontend:ui:projectDetails"))
@@ -32,7 +28,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                api(libs.kodein.android.core)
+            }
+        }
         val androidUnitTest by getting {
             dependencies {
                 implementation("junit:junit:4.13.2")

@@ -20,6 +20,7 @@ dependencies {
     implementation(libs.kotlin.coroutines.javafx)
     implementation(libs.clikt)
     implementation(project(":frontend:common"))
+    implementation(project(":frontend:di"))
     implementation(project(":frontend:navigation"))
     implementation(project(":frontend:ui:home"))
     implementation(project(":frontend:ui:createProject"))

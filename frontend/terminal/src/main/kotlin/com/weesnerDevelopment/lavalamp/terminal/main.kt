@@ -1,34 +1,29 @@
 package com.weesnerDevelopment.lavalamp.terminal
 
-import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.github.ajalt.clikt.core.CliktCommand
 import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.lavalamp.api.project.InMemoryProjectRepository
 import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
+import com.weesnerDevelopment.lavalamp.di.setupDI
 import com.weesnerDevelopment.navigation.Child
-import com.weesnerDevelopment.navigation.DefaultRootComponent
 import com.weesnerDevelopment.navigation.RootComponent
 import kotlinx.coroutines.Dispatchers
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.instance
 import kotlin.system.exitProcess
 
 internal val onlyDispatcher = Dispatchers.Unconfined
 
 fun main(args: Array<String>) = Program().main(args)
 
-class Program : CliktCommand() {
-    private val lifecycle = LifecycleRegistry()
-    private val componentContext = DefaultComponentContext(lifecycle = lifecycle)
+class Program : CliktCommand(), DIAware {
+    override val di: DI by DI.lazy {
+        extend(setupDI(Platform.Terminal))
+    }
 
-    private val projectRepo = InMemoryProjectRepository
-
-    private val rootComponent = DefaultRootComponent(
-        platform = Platform.Terminal,
-        projectRepository = projectRepo,
-        componentContext = componentContext,
-        coroutineContext = onlyDispatcher,
-        navContext = onlyDispatcher,
-    )
+    private val rootComponent by instance<RootComponent>()
+    private val projectRepo by instance<ProjectRepository>()
 
     override fun run() {
         RootContent(

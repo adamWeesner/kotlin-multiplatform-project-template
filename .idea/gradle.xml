@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/frontend/compose" />
             <option value="$PROJECT_DIR$/frontend/compose/core" />
             <option value="$PROJECT_DIR$/frontend/desktop" />
+            <option value="$PROJECT_DIR$/frontend/di" />
             <option value="$PROJECT_DIR$/frontend/navigation" />
             <option value="$PROJECT_DIR$/frontend/terminal" />
             <option value="$PROJECT_DIR$/frontend/ui" />

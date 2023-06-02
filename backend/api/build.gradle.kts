@@ -16,6 +16,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(libs.kodein)
                 implementation(project(":common:sdk"))
             }
         }

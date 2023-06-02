@@ -4,24 +4,23 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
-import com.arkivanov.decompose.defaultComponentContext
 import com.weesnerDevelopment.common.Platform
-import com.weesnerDevelopment.lavalamp.api.project.InMemoryProjectRepository
-import com.weesnerDevelopment.navigation.DefaultRootComponent
+import com.weesnerDevelopment.lavalamp.di.setupDI
+import com.weesnerDevelopment.navigation.RootComponent
 import com.weesnerDevelopment.navigation.RootContent
-import kotlinx.coroutines.Dispatchers
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.instance
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DIAware {
+    override val di: DI by DI.lazy {
+        extend(setupDI(Platform.Android))
+    }
+
+    private val rootComponent: RootComponent by di.instance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val rootComponent = DefaultRootComponent(
-            platform = Platform.Android,
-            componentContext = defaultComponentContext(),
-            projectRepository = InMemoryProjectRepository,
-            coroutineContext = Dispatchers.IO,
-            navContext = Dispatchers.Main,
-        )
 
         setContent {
             MaterialTheme {

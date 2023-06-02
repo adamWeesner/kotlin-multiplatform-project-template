@@ -21,6 +21,7 @@ pluginManagement {
                 version("coroutines", "1.7.1")
                 version("compose", extra["compose.version"] as String)
                 version("decompose", "2.0.0-alpha-02")
+                version("kodein", "7.19.0")
 
                 library(
                     "kotlin-coroutines-core",
@@ -52,6 +53,16 @@ pluginManagement {
                     "com.arkivanov.decompose",
                     "extensions-compose-jetbrains"
                 ).versionRef("decompose")
+                library(
+                    "kodein",
+                    "org.kodein.di",
+                    "kodein-di"
+                ).versionRef("kodein")
+                library(
+                    "kodein-android-core",
+                    "org.kodein.di",
+                    "kodein-di-framework-android-core"
+                ).versionRef("kodein")
             }
         }
     }
@@ -66,6 +77,7 @@ include(
     ":frontend:terminal",
 
     // shared frontend
+    ":frontend:di",
     ":frontend:common",
     ":frontend:navigation",
 
