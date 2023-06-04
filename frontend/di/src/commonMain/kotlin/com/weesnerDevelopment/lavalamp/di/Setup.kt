@@ -2,9 +2,9 @@ package com.weesnerDevelopment.lavalamp.di
 
 import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.lavalamp.api.project.projectRepositoryModule
-import com.weesnerDevelopment.navigation.componentContextModule
-import com.weesnerDevelopment.navigation.coroutineScopeModule
-import com.weesnerDevelopment.navigation.navModule
+import com.weesnerDevelopment.navigation.di.componentContextModule
+import com.weesnerDevelopment.navigation.di.coroutineScopeModule
+import com.weesnerDevelopment.navigation.di.navModule
 import org.kodein.di.DI
 import org.kodein.di.bindConstant
 

@@ -1,79 +1,39 @@
 package com.weesnerDevelopment.navigation.factory
 
-import com.arkivanov.decompose.ComponentContext
-import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
-import com.weesnerDevelopment.lavalamp.ui.createProject.DefaultCreateProjectComponent
-import com.weesnerDevelopment.lavalamp.ui.home.DefaultHomeComponent
-import com.weesnerDevelopment.lavalamp.ui.projectDetails.DefaultProjectDetailsComponent
+import com.weesnerDevelopment.lavalamp.ui.createProject.CreateProjectComponent
+import com.weesnerDevelopment.lavalamp.ui.home.HomeComponent
+import com.weesnerDevelopment.lavalamp.ui.projectDetails.ProjectDetailsComponent
 import com.weesnerDevelopment.navigation.Child
 import com.weesnerDevelopment.navigation.Config
-import com.weesnerDevelopment.navigation.Navigator
 import com.weesnerDevelopment.navigation.ScreenConfig
 import org.kodein.di.DI
-import kotlin.coroutines.CoroutineContext
+import org.kodein.di.DIAware
+import org.kodein.di.instance
+import org.kodein.di.provider
 
 interface ScreenComponentFactory {
-    fun create(config: ScreenConfig, navigator: Navigator): Child.Screen
+    fun create(config: ScreenConfig): Child.Screen
 }
 
-internal class DefaultScreenComponentFactory(
-    private val componentContext: ComponentContext,
-    private val coroutineContext: CoroutineContext,
-    private val navContext: CoroutineContext,
-    private val projectRepository: ProjectRepository,
-) : ScreenComponentFactory {
-    override fun create(config: ScreenConfig, navigator: Navigator): Child.Screen {
+internal class DIScreenComponentFactory(
+    override val di: DI
+) : ScreenComponentFactory, DIAware {
+    override fun create(config: ScreenConfig): Child.Screen {
         return when (config) {
-            Config.Home -> Child.Home(
-                DefaultHomeComponent(
-                    componentContext = componentContext,
-                    coroutineContext = coroutineContext,
-                    projectRepository = projectRepository,
-                    onCreateProject = {
-                        navigator.bringToFront(Config.CreateProject)
-                    },
-                    onProjectDetails = { projectId ->
-                        navigator.bringToFront(Config.ProjectDetails(projectId))
-                    }
-                )
-            )
+            Config.CreateProject -> {
+                val component by instance<CreateProjectComponent>()
+                Child.CreateProject(component)
+            }
 
-            Config.CreateProject -> Child.CreateProject(
-                DefaultCreateProjectComponent(
-                    componentContext = componentContext,
-                    coroutineContext = coroutineContext,
-                    navContext = navContext,
-                    projectRepository = projectRepository,
-                    onCreateSuccess = {
-                        navigator.back()
-                    },
-                    onCreateFailed = {
-                        navigator.bringToFront(Config.SampleForDialog)
-                    }
-                )
-            )
+            Config.Home -> {
+                val component by instance<HomeComponent>()
+                Child.Home(component)
+            }
 
-            is Config.ProjectDetails -> Child.ProjectDetails(
-                DefaultProjectDetailsComponent(
-                    componentContext = componentContext,
-                    coroutineContext = coroutineContext,
-                    navContext = navContext,
-                    projectRepository = projectRepository,
-                    projectId = config.projectId,
-                    onGetFail = {
-                        navigator.bringToFront(Config.SampleForDialog)
-                    },
-                    onProjectDeleteSuccess = {
-                        navigator.back()
-                    },
-                    onProjectDeleteFail = {
-                        navigator.bringToFront(Config.SampleForDialog)
-                    },
-                    onBack = {
-                        navigator.back()
-                    }
-                )
-            )
+            is Config.ProjectDetails -> {
+                val component: () -> ProjectDetailsComponent by provider(arg = config.projectId)
+                Child.ProjectDetails(component())
+            }
         }
     }
 }

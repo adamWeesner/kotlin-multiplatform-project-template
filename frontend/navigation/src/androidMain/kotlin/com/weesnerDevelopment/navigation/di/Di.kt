@@ -1,4 +1,4 @@
-package com.weesnerDevelopment.navigation
+package com.weesnerDevelopment.navigation.di
 
 import androidx.appcompat.app.AppCompatActivity
 import com.arkivanov.decompose.ComponentContext

@@ -14,7 +14,7 @@ import com.weesnerDevelopment.navigation.factory.DialogComponentFactory
 import com.weesnerDevelopment.navigation.factory.DrawerComponentFactory
 import com.weesnerDevelopment.navigation.factory.ScreenComponentFactory
 
-interface RootComponent {
+interface RootComponent: Navigator {
     val screenStack: Value<ChildStack<ScreenConfig, Child.Screen>>
     val dialogSlot: Value<ChildSlot<DialogConfig, Child.Dialog>>
     val bottomSheetSlot: Value<ChildSlot<BottomSheetConfig, Child.BottomSheet>>
@@ -33,14 +33,14 @@ internal class DefaultRootComponent(
     private val dialogFactory: DialogComponentFactory,
     private val drawerFactory: DrawerComponentFactory,
     private val bottomSheetFactory: BottomSheetComponentFactory,
-) : RootComponent, ComponentContext by componentContext, Navigator {
+) : RootComponent, ComponentContext by componentContext {
     private val configsOnStack: MutableList<Config> = mutableListOf(Config.Home)
 
     private val screenNav: StackNav<ScreenConfig, Child.Screen> = setupStackNav(
         platform = platform,
         initial = listOf(Config.Home),
         factory = { config, _ ->
-            screenFactory.create(config, this)
+            screenFactory.create(config)
         }
     )
 

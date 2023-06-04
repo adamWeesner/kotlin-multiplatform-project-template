@@ -1,6 +1,6 @@
 @file:JvmName("DiJvm")
 
-package com.weesnerDevelopment.navigation
+package com.weesnerDevelopment.navigation.di
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.DefaultComponentContext
