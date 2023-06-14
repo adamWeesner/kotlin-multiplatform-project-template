@@ -10,3 +10,5 @@ simple as copy pasting the `Desktop` Gradle module and renaming things as a jump
 ### [Wiring up a new UI](ui/wiringUpANewUi.md)
 
 ### [Dependency Injection](docs/diReadme.md)
+
+### [Adding an image](../imageParser/readme.md)

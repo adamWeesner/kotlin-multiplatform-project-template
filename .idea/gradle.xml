@@ -20,11 +20,13 @@
             <option value="$PROJECT_DIR$/frontend/desktop" />
             <option value="$PROJECT_DIR$/frontend/di" />
             <option value="$PROJECT_DIR$/frontend/navigation" />
+            <option value="$PROJECT_DIR$/frontend/resources" />
             <option value="$PROJECT_DIR$/frontend/terminal" />
             <option value="$PROJECT_DIR$/frontend/ui" />
             <option value="$PROJECT_DIR$/frontend/ui/createProject" />
             <option value="$PROJECT_DIR$/frontend/ui/home" />
             <option value="$PROJECT_DIR$/frontend/ui/projectDetails" />
+            <option value="$PROJECT_DIR$/imageParser" />
           </set>
         </option>
       </GradleProjectSettings>

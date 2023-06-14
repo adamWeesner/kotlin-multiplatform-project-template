@@ -80,6 +80,7 @@ include(
     ":frontend:di",
     ":frontend:common",
     ":frontend:navigation",
+    ":frontend:resources",
 
     // compose frontend things
     ":frontend:compose:core",
@@ -93,5 +94,8 @@ include(
     ":backend:api",
 
     // shared across everything
-    ":common:sdk"
+    ":common:sdk",
+
+    // other
+    ":imageParser",
 )

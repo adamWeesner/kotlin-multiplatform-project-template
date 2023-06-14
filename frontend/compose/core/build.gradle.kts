@@ -20,6 +20,7 @@ kotlin {
                 api(compose.material)
                 api(project(":backend:api"))
                 api(project(":common:sdk"))
+                api(project(":frontend:resources"))
             }
         }
         val commonTest by getting {
