@@ -60,7 +60,7 @@ object InMemoryProjectRepository : ProjectRepository {
         val index = projects.indexOf(foundProject)
 
         if (foundProject == null)
-            return Either.failure(ProjectRepositoryError.Update.ProjectNotFound)
+            return Either.failure(ProjectRepositoryError.Update.ActionFailed)
 
         val deleted = projects.remove(foundProject)
 
@@ -95,7 +95,7 @@ object InMemoryProjectRepository : ProjectRepository {
         val foundProject = projects.find { it.id == id }
 
         if (foundProject == null)
-            return Either.failure(ProjectRepositoryError.Delete.ProjectNotFound)
+            return Either.failure(ProjectRepositoryError.Delete.ActionFailed)
 
         val deleted = projects.remove(foundProject)
 

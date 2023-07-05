@@ -1,11 +1,9 @@
-import org.jetbrains.compose.compose
-
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
 }
 
-group = "com.weesnerDevelopment.lavalamp.backend.api"
+group = "com.weesnerDevelopment.lavalamp.common.sdk"
 version = "1.0-SNAPSHOT"
 
 kotlin {
@@ -16,9 +14,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.kodein)
-                implementation(project(":common:sdk"))
-                implementation(project(":common:appwrite"))
+                api(libs.kotlin.coroutines.core)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.cio)
+                implementation(libs.kotlin.serialization.json)
             }
         }
         val commonTest by getting {

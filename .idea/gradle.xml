@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/backend" />
             <option value="$PROJECT_DIR$/backend/api" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/common/appwrite" />
             <option value="$PROJECT_DIR$/common/sdk" />
             <option value="$PROJECT_DIR$/frontend" />
             <option value="$PROJECT_DIR$/frontend/android" />

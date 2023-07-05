@@ -9,6 +9,7 @@ pluginManagement {
     plugins {
         kotlin("multiplatform") version (extra["kotlin.version"] as String) apply false
         kotlin("android") version (extra["kotlin.version"] as String) apply false
+        kotlin("plugin.serialization") version (extra["kotlin.version"] as String) apply false
         id("com.android.application") version (extra["agp.version"] as String) apply false
         id("com.android.library") version (extra["agp.version"] as String) apply false
         id("org.jetbrains.compose") version (extra["compose.version"] as String) apply false
@@ -22,6 +23,7 @@ pluginManagement {
                 version("compose", extra["compose.version"] as String)
                 version("decompose", "2.0.0-alpha-02")
                 version("kodein", "7.19.0")
+                version("ktor", "2.3.1")
 
                 library(
                     "kotlin-coroutines-core",
@@ -63,6 +65,35 @@ pluginManagement {
                     "org.kodein.di",
                     "kodein-di-framework-android-core"
                 ).versionRef("kodein")
+                library(
+                    "kotlin-coroutines-core",
+                    "org.jetbrains.kotlinx",
+                    "kotlinx-coroutines-core"
+                ).versionRef("coroutines")
+                library(
+                    "kotlin-coroutines-android",
+                    "org.jetbrains.kotlinx",
+                    "kotlinx-coroutines-android"
+                ).versionRef("coroutines")
+                library(
+                    "kotlin-coroutines-javafx",
+                    "org.jetbrains.kotlinx",
+                    "kotlinx-coroutines-javafx"
+                ).versionRef("coroutines")
+                library(
+                    "ktor-client-core",
+                    "io.ktor",
+                    "ktor-client-core"
+                ).versionRef("ktor")
+                library(
+                    "ktor-client-cio",
+                    "io.ktor",
+                    "ktor-client-cio"
+                ).versionRef("ktor")
+                library(
+                    "kotlin-serialization-json",
+                    "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0"
+                )
             }
         }
     }
@@ -95,6 +126,7 @@ include(
 
     // shared across everything
     ":common:sdk",
+    ":common:appwrite",
 
     // other
     ":imageParser",

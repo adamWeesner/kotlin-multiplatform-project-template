@@ -1,25 +1,25 @@
 package com.weesnerDevelopment.lavalamp.api.project
 
 sealed interface ProjectRepositoryError {
-    sealed interface GetAll {
+    sealed interface GetAll : ProjectRepositoryError {
         object NoProjects : GetAll
+        object Unknown : GetAll
+        class Network(val code: Int?, val message: String?) : GetAll
     }
 
-    sealed interface Get {
+    sealed interface Get : ProjectRepositoryError {
         object ProjectNotFound : Get
     }
 
-    sealed interface Add {
+    sealed interface Add : ProjectRepositoryError {
         object ActionFailed : Add
     }
 
-    sealed interface Update {
-        object ProjectNotFound : Update
+    sealed interface Update : ProjectRepositoryError {
         object ActionFailed : Update
     }
 
-    sealed interface Delete {
-        object ProjectNotFound : Delete
+    sealed interface Delete : ProjectRepositoryError {
         object ActionFailed : Delete
     }
 }
