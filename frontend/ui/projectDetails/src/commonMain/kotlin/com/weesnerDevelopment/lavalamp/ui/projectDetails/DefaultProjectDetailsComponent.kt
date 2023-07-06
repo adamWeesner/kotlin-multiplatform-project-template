@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
+import com.weesnerDevelopment.lavalamp.logging.Logger
 import com.weesnerDevelopment.lavalamp.sdk.Either
 import com.weesnerDevelopment.lavalamp.sdk.Project
 import kotlinx.coroutines.CoroutineScope
@@ -58,15 +59,13 @@ class DefaultProjectDetailsComponent(
         scope.launch {
             projectRepository.delete(project.id) {
                 onSuccess {
-                    // todo add logging lib
-                    println("Successfully deleted project")
+                    Logger.debug("Successfully deleted project")
                     scope.launch(navContext) {
                         onProjectDeleteSuccess()
                     }
                 }
                 onFailure {
-                    // todo add logging lib
-                    println("An error occurred attempting to save project:\n $it")
+                    Logger.debug("An error occurred attempting to save project:\n $it")
                     scope.launch(navContext) {
                         onProjectDeleteFail()
                     }

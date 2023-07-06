@@ -6,6 +6,8 @@ import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
 import com.weesnerDevelopment.lavalamp.di.setupDI
 import com.weesnerDevelopment.navigation.Child
 import com.weesnerDevelopment.navigation.RootComponent
+import kimchi.Kimchi
+import kimchi.logger.StandardWriter
 import kotlinx.coroutines.Dispatchers
 import org.kodein.di.DI
 import org.kodein.di.DIAware
@@ -25,6 +27,8 @@ class Program : CliktCommand(), DIAware {
     private val projectRepo by instance<ProjectRepository>()
 
     override fun run() {
+        Kimchi.addLog(StandardWriter)
+
         RootContent(
             programArgs = currentContext.originalArgv,
             projectRepo = projectRepo,

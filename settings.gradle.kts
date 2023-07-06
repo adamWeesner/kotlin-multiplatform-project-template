@@ -47,6 +47,10 @@ pluginManagement {
                     "extensions-compose-jetbrains"
                 ).versionRef("decompose")
                 library(
+                    "kimchi",
+                    "com.inkapplications.kimchi:core:2.0.3"
+                )
+                library(
                     "kodein",
                     "org.kodein.di",
                     "kodein-di"
@@ -116,8 +120,10 @@ include(
     ":backend:api",
 
     // shared across everything
-    ":common:sdk",
+    ":common:analytics",
     ":common:appwrite",
+    ":common:logging",
+    ":common:sdk",
 
     // other
     ":imageParser",

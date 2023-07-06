@@ -14,6 +14,7 @@ java {
 }
 
 dependencies {
+    implementation(project(":common:logging"))
     implementation(project(":frontend:di"))
     implementation(project(":frontend:common"))
     implementation(project(":frontend:compose:core"))

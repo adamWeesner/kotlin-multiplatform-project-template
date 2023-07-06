@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
 }
 
-group = "com.weesnerDevelopment.lavalamp.common.sdk"
+group = "com.weesnerDevelopment.lavalamp.common.analytics"
 version = "1.0-SNAPSHOT"
 
 kotlin {
@@ -12,18 +12,14 @@ kotlin {
         jvmToolchain(17)
     }
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
+        val commonMain by getting {
             dependencies {
-                implementation(kotlin("test"))
+                api(libs.kimchi)
             }
         }
+        val commonTest by getting
         val androidMain by getting
-        val androidUnitTest by getting {
-            dependencies {
-                implementation("junit:junit:4.13.2")
-            }
-        }
+        val androidUnitTest by getting
         val desktopMain by getting
         val desktopTest by getting
     }

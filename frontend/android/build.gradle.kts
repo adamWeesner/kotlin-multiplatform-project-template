@@ -8,6 +8,7 @@ group = "com.weesnerDevelopment.lavalamp.android"
 version = "1.0-SNAPSHOT"
 
 dependencies {
+    implementation(project(":common:logging"))
     implementation(project(":frontend:common"))
     implementation(project(":frontend:compose:core"))
     implementation(project(":frontend:di"))

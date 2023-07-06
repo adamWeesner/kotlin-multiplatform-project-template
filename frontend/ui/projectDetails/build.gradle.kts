@@ -14,6 +14,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":backend:api"))
+                implementation(project(":common:logging"))
                 implementation(project(":frontend:common"))
                 implementation(project(":frontend:compose:core"))
                 implementation(libs.decompose)

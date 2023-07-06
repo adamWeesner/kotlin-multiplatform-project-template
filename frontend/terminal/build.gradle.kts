@@ -19,6 +19,7 @@ dependencies {
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin.coroutines.javafx)
     implementation(libs.clikt)
+    implementation(project(":common:logging"))
     implementation(project(":frontend:common"))
     implementation(project(":frontend:di"))
     implementation(project(":frontend:navigation"))
