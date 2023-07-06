@@ -3,7 +3,7 @@ package com.weesnerDevelopment.lavalamp.android
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.lavalamp.di.setupDI
 import com.weesnerDevelopment.navigation.RootComponent

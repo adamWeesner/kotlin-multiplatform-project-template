@@ -18,6 +18,7 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
+                api(compose.material3)
                 api(project(":backend:api"))
                 api(project(":common:sdk"))
                 api(project(":frontend:resources"))

@@ -21,30 +21,21 @@ pluginManagement {
                 version("kotlin", extra["kotlin.version"] as String)
                 version("coroutines", "1.7.1")
                 version("compose", extra["compose.version"] as String)
+                version("composeMaterial3", "1.1.1")
                 version("decompose", "2.0.0-alpha-02")
                 version("kodein", "7.19.0")
                 version("ktor", "2.3.1")
 
                 library(
-                    "kotlin-coroutines-core",
-                    "org.jetbrains.kotlinx",
-                    "kotlinx-coroutines-core"
-                ).versionRef("coroutines")
-                library(
-                    "kotlin-coroutines-android",
-                    "org.jetbrains.kotlinx",
-                    "kotlinx-coroutines-android"
-                ).versionRef("coroutines")
-                library(
-                    "kotlin-coroutines-javafx",
-                    "org.jetbrains.kotlinx",
-                    "kotlinx-coroutines-javafx"
-                ).versionRef("coroutines")
-                library(
                     "clikt",
                     "com.github.ajalt.clikt",
                     "clikt"
                 ).version("3.5.2")
+                library(
+                    "compose-material3-windowSize",
+                    "androidx.compose.material3",
+                    "material3-window-size-class"
+                ).versionRef("composeMaterial3")
                 library(
                     "decompose",
                     "com.arkivanov.decompose",
