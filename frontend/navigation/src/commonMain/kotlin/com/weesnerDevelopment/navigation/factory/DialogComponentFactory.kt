@@ -7,7 +7,7 @@ import com.weesnerDevelopment.navigation.DialogConfig
 import com.weesnerDevelopment.navigation.Navigator
 import kotlin.coroutines.CoroutineContext
 
-interface DialogComponentFactory {
+internal interface DialogComponentFactory {
     fun create(config: DialogConfig, navigator: Navigator): Child.Dialog
 }
 

@@ -7,7 +7,7 @@ import io.appwrite.ID
 import io.appwrite.exceptions.AppwriteException
 import io.appwrite.services.Databases
 
-object AppwriteProjectRepository : ProjectRepository {
+internal object AppwriteProjectRepository : ProjectRepository {
     private val client = Client().apply {
         setSelfSigned(false)
         setEndpoint("https://appwrite.weesnerdevelopment.com/v1")

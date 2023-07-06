@@ -7,7 +7,7 @@ import com.weesnerDevelopment.navigation.DrawerConfig
 import com.weesnerDevelopment.navigation.Navigator
 import kotlin.coroutines.CoroutineContext
 
-interface DrawerComponentFactory {
+internal interface DrawerComponentFactory {
     fun create(config: DrawerConfig, navigator: Navigator): Child.Drawer
 }
 

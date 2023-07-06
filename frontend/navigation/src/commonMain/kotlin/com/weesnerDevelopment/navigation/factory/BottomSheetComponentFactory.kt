@@ -7,7 +7,7 @@ import com.weesnerDevelopment.navigation.Config
 import com.weesnerDevelopment.navigation.Navigator
 import kotlin.coroutines.CoroutineContext
 
-interface BottomSheetComponentFactory {
+internal interface BottomSheetComponentFactory {
     fun create(config: BottomSheetConfig, navigator: Navigator): Child.BottomSheet
 }
 

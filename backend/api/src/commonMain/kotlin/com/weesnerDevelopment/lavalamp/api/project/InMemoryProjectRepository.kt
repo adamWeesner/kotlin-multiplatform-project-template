@@ -3,7 +3,7 @@ package com.weesnerDevelopment.lavalamp.api.project
 import com.weesnerDevelopment.lavalamp.sdk.Either
 import com.weesnerDevelopment.lavalamp.sdk.Project
 
-object InMemoryProjectRepository : ProjectRepository {
+internal object InMemoryProjectRepository : ProjectRepository {
     private val projects: MutableList<Project> = mutableListOf()
 
     override suspend fun getAll(): Either<List<Project>, ProjectRepositoryError.GetAll> {

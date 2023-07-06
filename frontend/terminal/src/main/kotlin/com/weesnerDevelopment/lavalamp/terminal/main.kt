@@ -2,7 +2,6 @@ package com.weesnerDevelopment.lavalamp.terminal
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.weesnerDevelopment.common.Platform
-import com.weesnerDevelopment.lavalamp.api.project.InMemoryProjectRepository
 import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
 import com.weesnerDevelopment.lavalamp.di.setupDI
 import com.weesnerDevelopment.navigation.Child

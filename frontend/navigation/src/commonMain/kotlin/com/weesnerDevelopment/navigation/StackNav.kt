@@ -12,7 +12,7 @@ class StackNav<T : Config, C: Child>(
     val stack: Value<ChildStack<T, C>>
 )
 
-inline fun <reified T : Config, reified C: Child> ComponentContext.setupStackNav(
+internal inline fun <reified T : Config, reified C: Child> ComponentContext.setupStackNav(
     platform: Platform,
     initial: List<T>,
     noinline factory: (T, ComponentContext) -> C

@@ -11,7 +11,7 @@ import org.kodein.di.DIAware
 import org.kodein.di.instance
 import org.kodein.di.provider
 
-interface ScreenComponentFactory {
+internal interface ScreenComponentFactory {
     fun create(config: ScreenConfig): Child.Screen
 }
 

@@ -1508,28 +1508,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * List Documents
-     *
-     * Get a list of all the user&#039;s documents in a given collection. You can use the query params to filter your results.
-     *
-     * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/queries). Maximum of 100 queries are allowed, each 4096 characters long.
-     * @return [io.appwrite.models.DocumentList<T>]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun listDocuments(
-        databaseId: String,
-        collectionId: String,
-        queries: List<String>? = null,
-    ): DocumentList<Map<String, Any>> = listDocuments(
-        databaseId,
-        collectionId,
-        queries,
-    )
-
-    /**
      * Create Document
      *
      * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](/docs/server/databases#databasesCreateCollection) API or directly from your database console.
@@ -1576,34 +1554,6 @@ class Databases(client: Client) : Service(client) {
     }
 
     /**
-     * Create Document
-     *
-     * Create a new Document. Before using this route, you should create a new collection resource using either a [server integration](/docs/server/databases#databasesCreateCollection) API or directly from your database console.
-     *
-     * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection). Make sure to define attributes before creating documents.
-     * @param documentId Document ID. Choose a custom ID or generate a random ID with `ID.unique()`. Valid chars are a-z, A-Z, 0-9, period, hyphen, and underscore. Can't start with a special char. Max length is 36 chars.
-     * @param data Document data as JSON object.
-     * @param permissions An array of permissions strings. By default, only the current user is granted all permissions. [Learn more about permissions](/docs/permissions).
-     * @return [io.appwrite.models.Document<T>]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun createDocument(
-        databaseId: String,
-        collectionId: String,
-        documentId: String,
-        data: Any,
-        permissions: List<String>? = null,
-    ): Document<Map<String, Any>> = createDocument(
-        databaseId,
-        collectionId,
-        documentId,
-        data,
-        permissions,
-    )
-
-    /**
      * Get Document
      *
      * Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
@@ -1645,31 +1595,6 @@ class Databases(client: Client) : Service(client) {
             converter,
         )
     }
-
-    /**
-     * Get Document
-     *
-     * Get a document by its unique ID. This endpoint response returns a JSON object with the document data.
-     *
-     * @param databaseId Database ID.
-     * @param collectionId Collection ID. You can create a new collection using the Database service [server integration](https://appwrite.io/docs/server/databases#databasesCreateCollection).
-     * @param documentId Document ID.
-     * @param queries Array of query strings generated using the Query class provided by the SDK. [Learn more about queries](https://appwrite.io/docs/databases#querying-documents). Only method allowed is select.
-     * @return [io.appwrite.models.Document<T>]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun getDocument(
-        databaseId: String,
-        collectionId: String,
-        documentId: String,
-        queries: List<String>? = null,
-    ): Document<Map<String, Any>> = getDocument(
-        databaseId,
-        collectionId,
-        documentId,
-        queries,
-    )
 
     /**
      * Update Document
@@ -1716,34 +1641,6 @@ class Databases(client: Client) : Service(client) {
             converter,
         )
     }
-
-    /**
-     * Update Document
-     *
-     * Update a document by its unique ID. Using the patch method you can pass only specific fields that will get updated.
-     *
-     * @param databaseId Database ID.
-     * @param collectionId Collection ID.
-     * @param documentId Document ID.
-     * @param data Document data as JSON object. Include only attribute and value pairs to be updated.
-     * @param permissions An array of permissions strings. By default, the current permissions are inherited. [Learn more about permissions](/docs/permissions).
-     * @return [io.appwrite.models.Document<T>]
-     */
-    @JvmOverloads
-    @Throws(AppwriteException::class)
-    suspend fun updateDocument(
-        databaseId: String,
-        collectionId: String,
-        documentId: String,
-        data: Any? = null,
-        permissions: List<String>? = null,
-    ): Document<Map<String, Any>> = updateDocument(
-        databaseId,
-        collectionId,
-        documentId,
-        data,
-        permissions,
-    )
 
     /**
      * Delete Document

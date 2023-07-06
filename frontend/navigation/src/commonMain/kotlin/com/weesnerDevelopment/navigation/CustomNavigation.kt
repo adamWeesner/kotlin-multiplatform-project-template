@@ -9,7 +9,7 @@ import com.arkivanov.decompose.router.stack.StackNavigationSource
  * Custom navigation based on [StackNavigation] with the main thread limitations. This should only
  * be used for frontends that do not have a "main thread" i.e.: Terminal programs.
  */
-class CustomStackNavigation<C : Any> : StackNavigation<C> {
+internal class CustomStackNavigation<C : Any> : StackNavigation<C> {
     private val relay = Relay<StackNavigationSource.Event<C>>()
 
     override fun navigate(
@@ -28,7 +28,7 @@ class CustomStackNavigation<C : Any> : StackNavigation<C> {
     }
 }
 
-class CustomSlotNavigation<C: Any>: SlotNavigation<C> {
+internal class CustomSlotNavigation<C: Any>: SlotNavigation<C> {
     private val relay = Relay<SlotNavigationSource.Event<C>>()
 
     override fun navigate(

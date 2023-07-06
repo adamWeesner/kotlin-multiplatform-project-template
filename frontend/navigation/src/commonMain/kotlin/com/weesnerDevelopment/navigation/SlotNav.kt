@@ -12,7 +12,7 @@ class SlotNav<T : Config, C : Child>(
     val slot: Value<ChildSlot<T, C>>
 )
 
-inline fun <reified T : Config, reified C : Child> ComponentContext.setupSlotNav(
+internal inline fun <reified T : Config, reified C : Child> ComponentContext.setupSlotNav(
     key: String,
     platform: Platform,
     initial: T? = null,
