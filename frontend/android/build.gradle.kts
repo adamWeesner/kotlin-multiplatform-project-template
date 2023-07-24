@@ -12,7 +12,8 @@ dependencies {
     implementation(project(":frontend:common"))
     implementation(project(":frontend:compose:core"))
     implementation(project(":frontend:di"))
-    implementation(project(":frontend:navigation"))
+    implementation(project(":frontend:navigation:core"))
+    implementation(project(":frontend:navigation:impl"))
     implementation("androidx.activity:activity-compose:1.5.0")
 }
 

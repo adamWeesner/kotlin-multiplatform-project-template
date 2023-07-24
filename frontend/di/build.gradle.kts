@@ -17,10 +17,10 @@ kotlin {
                 implementation(libs.kotlin.coroutines.core)
                 implementation(project(":backend:api"))
                 implementation(project(":frontend:common"))
-                implementation(project(":frontend:navigation"))
-                implementation(project(":frontend:ui:home"))
-                implementation(project(":frontend:ui:createProject"))
-                implementation(project(":frontend:ui:projectDetails"))
+                implementation(project(":frontend:navigation:impl"))
+                implementation(project(":frontend:ui:home:impl"))
+                implementation(project(":frontend:ui:createProject:impl"))
+                implementation(project(":frontend:ui:projectDetails:impl"))
             }
         }
         val commonTest by getting {

@@ -18,7 +18,8 @@ dependencies {
     implementation(project(":frontend:di"))
     implementation(project(":frontend:common"))
     implementation(project(":frontend:compose:core"))
-    implementation(project(":frontend:navigation"))
+    implementation(project(":frontend:navigation:core"))
+    implementation(project(":frontend:navigation:impl"))
     implementation(compose.desktop.currentOs)
 }
 
@@ -30,6 +31,10 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "lavalamp"
             packageVersion = version.toString()
+
+            macOS {
+                setDockNameSameAsPackageName = true
+            }
         }
     }
 }

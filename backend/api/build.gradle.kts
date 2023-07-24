@@ -19,6 +19,7 @@ kotlin {
                 implementation(libs.kodein)
                 implementation(project(":common:sdk"))
                 implementation(project(":common:appwrite"))
+                implementation(project(":common:logging"))
             }
         }
         val commonTest by getting {

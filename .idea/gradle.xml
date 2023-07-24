@@ -11,7 +11,9 @@
             <option value="$PROJECT_DIR$/backend" />
             <option value="$PROJECT_DIR$/backend/api" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/common/analytics" />
             <option value="$PROJECT_DIR$/common/appwrite" />
+            <option value="$PROJECT_DIR$/common/logging" />
             <option value="$PROJECT_DIR$/common/sdk" />
             <option value="$PROJECT_DIR$/frontend" />
             <option value="$PROJECT_DIR$/frontend/android" />
@@ -21,12 +23,20 @@
             <option value="$PROJECT_DIR$/frontend/desktop" />
             <option value="$PROJECT_DIR$/frontend/di" />
             <option value="$PROJECT_DIR$/frontend/navigation" />
+            <option value="$PROJECT_DIR$/frontend/navigation/core" />
+            <option value="$PROJECT_DIR$/frontend/navigation/impl" />
             <option value="$PROJECT_DIR$/frontend/resources" />
             <option value="$PROJECT_DIR$/frontend/terminal" />
             <option value="$PROJECT_DIR$/frontend/ui" />
             <option value="$PROJECT_DIR$/frontend/ui/createProject" />
+            <option value="$PROJECT_DIR$/frontend/ui/createProject/core" />
+            <option value="$PROJECT_DIR$/frontend/ui/createProject/impl" />
             <option value="$PROJECT_DIR$/frontend/ui/home" />
+            <option value="$PROJECT_DIR$/frontend/ui/home/core" />
+            <option value="$PROJECT_DIR$/frontend/ui/home/impl" />
             <option value="$PROJECT_DIR$/frontend/ui/projectDetails" />
+            <option value="$PROJECT_DIR$/frontend/ui/projectDetails/core" />
+            <option value="$PROJECT_DIR$/frontend/ui/projectDetails/impl" />
             <option value="$PROJECT_DIR$/imageParser" />
           </set>
         </option>

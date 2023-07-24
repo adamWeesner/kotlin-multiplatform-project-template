@@ -5,6 +5,7 @@ import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
 import com.weesnerDevelopment.lavalamp.di.setupDI
 import com.weesnerDevelopment.navigation.Child
+import com.weesnerDevelopment.navigation.Config
 import com.weesnerDevelopment.navigation.RootComponent
 import kimchi.Kimchi
 import kimchi.logger.StandardWriter
@@ -12,13 +13,14 @@ import kotlinx.coroutines.Dispatchers
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.instance
-import kotlin.system.exitProcess
 
 internal val onlyDispatcher = Dispatchers.Unconfined
 
 fun main(args: Array<String>) = Program().main(args)
 
 class Program : CliktCommand(), DIAware {
+    private val showLogs = false
+
     override val di: DI by DI.lazy {
         extend(setupDI(Platform.Terminal))
     }
@@ -27,7 +29,8 @@ class Program : CliktCommand(), DIAware {
     private val projectRepo by instance<ProjectRepository>()
 
     override fun run() {
-        Kimchi.addLog(StandardWriter)
+        if (showLogs)
+            Kimchi.addLog(StandardWriter)
 
         RootContent(
             programArgs = currentContext.originalArgv,
@@ -46,30 +49,26 @@ fun RootContent(
         val command = when (val current = it.active.instance) {
             is Child.Home -> Home(
                 component = current.component,
-                onOptionSelected = { option ->
-                    when (option) {
-                        Home.StartingOption.CreateProject -> {
-                            current.component.onCreateProject()
+                navigator = component,
+                pickProject = {
+                    PickProject(
+                        projectRepository = projectRepo,
+                        onProjectSelected = { projectId ->
+                            component.bringToFront(Config.ProjectDetails(projectId))
                         }
-
-                        Home.StartingOption.ViewProject -> {
-                            PickProject(
-                                projectRepository = projectRepo,
-                                onProjectSelected = { projectId ->
-                                    current.component.onProjectDetails(projectId)
-                                }
-                            ).main(programArgs)
-                        }
-
-                        Home.StartingOption.Exit -> {
-                            exitProcess(0)
-                        }
-                    }
-                }
+                    ).main(programArgs)
+                },
             )
 
-            is Child.CreateProject -> CreateProject(component = current.component)
-            is Child.ProjectDetails -> ViewProject(component = current.component)
+            is Child.CreateProject -> CreateProject(
+                component = current.component,
+                navigator = component,
+            )
+
+            is Child.ProjectDetails -> ViewProject(
+                component = current.component,
+                navigator = component
+            )
         }
 
         command.main(programArgs)

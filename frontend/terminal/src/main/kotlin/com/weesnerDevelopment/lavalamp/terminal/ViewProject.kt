@@ -4,15 +4,47 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.prompt
 import com.github.ajalt.clikt.parameters.types.choice
 import com.weesnerDevelopment.lavalamp.ui.projectDetails.ProjectDetailsComponent
+import com.weesnerDevelopment.navigation.Config
+import com.weesnerDevelopment.navigation.Navigator
 
 class ViewProject(
-    private val component: ProjectDetailsComponent
+    private val component: ProjectDetailsComponent,
+    private val navigator: Navigator,
 ) : SuspendingCliktCommand() {
     sealed class Option(
         val name: String
     ) {
         object DeleteProject : Option(name = "Delete project")
         object Back : Option(name = "Back to home")
+    }
+
+    init {
+        component.state.subscribe { state ->
+            when (state.uiAction) {
+                ProjectDetailsComponent.UiAction.Back -> {
+                    navigator.back()
+                }
+
+                ProjectDetailsComponent.UiAction.GetDetailsFailure -> {
+                    echo("Failed to get project details, try again.")
+                    navigator.bringToFront(Config.Home)
+                }
+
+                ProjectDetailsComponent.UiAction.ProjectDeleteFailure -> {
+                    echo("Failed to delete project, come back and try agian.")
+                    navigator.bringToFront(Config.Home)
+                }
+
+                ProjectDetailsComponent.UiAction.ProjectDeleteSuccess -> {
+                    echo("Successfully deleted project")
+                    navigator.bringToFront(Config.Home)
+                }
+
+                null -> {
+                    // do nothing
+                }
+            }
+        }
     }
 
     private val details = with(component.state.value.project) {
@@ -54,7 +86,7 @@ class ViewProject(
             }
 
             Option.Back -> {
-                component.onBack()
+                component.uiAction(ProjectDetailsComponent.UiAction.Back)
             }
         }
     }

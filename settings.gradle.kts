@@ -33,9 +33,8 @@ pluginManagement {
                 ).version("3.5.2")
                 library(
                     "compose-material3-windowSize",
-                    "androidx.compose.material3",
-                    "material3-window-size-class"
-                ).versionRef("composeMaterial3")
+                    "dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.2.0"
+                )
                 library(
                     "decompose",
                     "com.arkivanov.decompose",
@@ -60,6 +59,10 @@ pluginManagement {
                     "org.kodein.di",
                     "kodein-di-framework-android-core"
                 ).versionRef("kodein")
+                library(
+                    "klock",
+                    "com.soywiz.korlibs.klock:klock:4.0.2"
+                )
                 library(
                     "kotlin-coroutines-core",
                     "org.jetbrains.kotlinx",
@@ -105,16 +108,20 @@ include(
     // shared frontend
     ":frontend:di",
     ":frontend:common",
-    ":frontend:navigation",
+    ":frontend:navigation:core",
+    ":frontend:navigation:impl",
     ":frontend:resources",
 
     // compose frontend things
     ":frontend:compose:core",
 
     // frontend uis the actual impls of things like "screens"
-    ":frontend:ui:home",
-    ":frontend:ui:createProject",
-    ":frontend:ui:projectDetails",
+    ":frontend:ui:home:core",
+    ":frontend:ui:home:impl",
+    ":frontend:ui:createProject:core",
+    ":frontend:ui:createProject:impl",
+    ":frontend:ui:projectDetails:core",
+    ":frontend:ui:projectDetails:impl",
 
     //backend
     ":backend:api",

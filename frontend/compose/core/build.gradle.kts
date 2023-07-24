@@ -19,8 +19,10 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material)
                 api(compose.material3)
+                api(libs.compose.material3.windowSize)
                 api(project(":backend:api"))
                 api(project(":common:sdk"))
+                api(project(":frontend:common"))
                 api(project(":frontend:resources"))
             }
         }

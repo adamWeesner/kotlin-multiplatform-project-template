@@ -5,10 +5,15 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.prompt
 import com.github.ajalt.clikt.parameters.types.choice
 import com.weesnerDevelopment.lavalamp.ui.home.HomeComponent
+import com.weesnerDevelopment.navigation.Config
+import com.weesnerDevelopment.navigation.Navigator
+import kotlinx.coroutines.runBlocking
+import kotlin.system.exitProcess
 
 class Home(
     private val component: HomeComponent,
-    private val onOptionSelected: (StartingOption) -> Unit
+    private val navigator: Navigator,
+    private val pickProject: () -> Unit,
 ) : CliktCommand() {
     sealed class StartingOption(
         val name: String
@@ -18,12 +23,32 @@ class Home(
         object Exit : StartingOption(name = "Exit")
     }
 
+    init {
+        component.state.subscribe { state ->
+            when (val action = state.uiAction) {
+                HomeComponent.Navigate.CreateProject -> {
+                    navigator.bringToFront(Config.CreateProject)
+                }
+
+                is HomeComponent.Navigate.ProjectDetails -> {
+                    navigator.bringToFront(Config.ProjectDetails(action.id))
+                }
+
+                null -> {
+                    // do nothing
+                }
+            }
+        }
+    }
+
     private val choices = buildMap<String, StartingOption> {
         var currentIndex = 0
 
         put(currentIndex.toString(), StartingOption.CreateProject).also { currentIndex++ }
 
-        component.getAllProjects()
+        runBlocking {
+            component.getAllProjects()
+        }
 
         if (component.state.value.projects.isNotEmpty())
             put(currentIndex.toString(), StartingOption.ViewProject).also { currentIndex++ }
@@ -39,6 +64,10 @@ class Home(
         .prompt("${choicesList}\nWhat would you like to do?")
 
     override fun run() {
-        onOptionSelected(action)
+        when (action) {
+            StartingOption.CreateProject -> component.uiAction(HomeComponent.Navigate.CreateProject)
+            StartingOption.Exit -> exitProcess(0)
+            StartingOption.ViewProject -> pickProject()
+        }
     }
 }
