@@ -3,12 +3,9 @@ plugins {
     application
 }
 
-group = "com.weesnerDevelopment.lavalamp.imageParser"
-version = "1.0-SNAPSHOT"
-
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+    targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())
 }
 
 dependencies {

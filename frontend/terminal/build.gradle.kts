@@ -3,12 +3,17 @@ plugins {
     application
 }
 
-group = "com.weesnerDevelopment.lavalamp.terminal"
-version = "1.0-SNAPSHOT"
-
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+    targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+}
+
+tasks.withType<Zip>() {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.withType<Tar>() {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 application {
@@ -16,18 +21,20 @@ application {
 }
 
 dependencies {
+    implementation(module = ProjectGradleModule.CommonLogging)
+    implementation(module = ProjectGradleModule.FrontendCommon)
+    implementation(module = ProjectGradleModule.FrontendDi)
+    implementation(module = ProjectGradleModule.FrontendComposeCore)
+    implementation(module = ProjectGradleModule.FrontendNavigationCore)
+    implementation(module = ProjectGradleModule.FrontendNavigationImpl)
+    implementation(module = ProjectGradleModule.FrontendUiHomeCore)
+    implementation(module = ProjectGradleModule.FrontendUiHomeImpl)
+    implementation(module = ProjectGradleModule.FrontendUiCreateProjectCore)
+    implementation(module = ProjectGradleModule.FrontendUiCreateProjectImpl)
+    implementation(module = ProjectGradleModule.FrontendUiProjectDetailsCore)
+    implementation(module = ProjectGradleModule.FrontendUiProjectDetailsImpl)
+
+    implementation(libs.clikt)
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin.coroutines.javafx)
-    implementation(libs.clikt)
-    implementation(project(":common:logging"))
-    implementation(project(":frontend:common"))
-    implementation(project(":frontend:di"))
-    implementation(project(":frontend:navigation:core"))
-    implementation(project(":frontend:navigation:impl"))
-    implementation(project(":frontend:ui:home:core"))
-    implementation(project(":frontend:ui:home:impl"))
-    implementation(project(":frontend:ui:createProject:core"))
-    implementation(project(":frontend:ui:createProject:impl"))
-    implementation(project(":frontend:ui:projectDetails:core"))
-    implementation(project(":frontend:ui:projectDetails:impl"))
 }

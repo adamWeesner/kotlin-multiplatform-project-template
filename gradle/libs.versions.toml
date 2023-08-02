@@ -1,0 +1,44 @@
+[versions]
+jvm = "17"
+java = "VERSION_17"
+android_sdk_min = "24"
+android_sdk_target = "33"
+android_sdk_compile = "33"
+agp = "7.4.2"
+compose_use = "1.4.1"
+compose_compiler = "1.4.6"
+compose_material_3 = "1.1.1"
+coroutines = "1.7.1"
+decompose = "2.0.0-alpha-02"
+kotlin = "1.8.20"
+kodein = "7.19.0"
+ktor = "2.3.1"
+
+[libraries]
+gradle-plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+
+appcompat = { module = "androidx.appcompat:appcompat", version = "1.5.1" }
+clikt = { module = "com.github.ajalt.clikt:clikt", version = "3.5.2" }
+compose-material3-windowSize = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version = "0.2.0" }
+decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+decompose-jetbrains = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose" }
+kimchi = { module = "com.inkapplications.kimchi:core", version = "2.0.3" }
+klock = { module = "com.soywiz.korlibs.klock:klock", version = "4.0.2" }
+kodein = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
+kodein-android-core = { module = "org.kodein.di:kodein-di-framework-android-core", version.ref = "kodein" }
+kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlin-coroutines-javafx = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-javafx", version.ref = "coroutines" }
+kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.5.0" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+
+[plugins]
+compose = { id = "org.jetbrains.compose", version.ref = "compose_use" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-lib = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

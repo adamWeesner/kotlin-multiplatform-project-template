@@ -1,4 +1,4 @@
-package com.weesnerDevelopment.lavalamp.resources
+package com.weesnerDevelopment.lavalamp.frontend.resources
 
 import java.util.UUID
 

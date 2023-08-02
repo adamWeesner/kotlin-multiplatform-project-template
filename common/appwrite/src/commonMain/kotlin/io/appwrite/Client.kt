@@ -1,3 +1,4 @@
+@file:Suppress("UNCHECKED_CAST")
 package io.appwrite
 
 import io.appwrite.exceptions.AppwriteException

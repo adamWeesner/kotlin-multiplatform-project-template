@@ -1,4 +1,4 @@
-package com.weesnerDevelopment.lavalamp.resources
+package com.weesnerDevelopment.lavalamp.frontend.resources
 
 sealed class Image(val fileName: String) {
     object Cancel : Image(fileName = "cancel")

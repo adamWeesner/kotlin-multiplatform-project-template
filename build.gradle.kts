@@ -21,7 +21,7 @@ plugins {
 subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17.majorVersion
+            jvmTarget = JavaVersion.valueOf(libs.versions.java.get()).majorVersion
         }
     }
 }
@@ -30,7 +30,7 @@ configurations.all {
     resolutionStrategy {
         resolutionStrategy.eachDependency {
             if (requested.group == "org.jetbrains.kotlin") {
-                useVersion(extra["kotlin.version"] as String)
+                useVersion(libs.versions.kotlin.get())
             }
             if (requested.group == "org.jetbrains.kotlinx" && requested.name.startsWith("kotlinx-coroutines")) {
                 useVersion(libs.versions.kotlin.get())

@@ -6,7 +6,7 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.update
 import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
 import com.weesnerDevelopment.lavalamp.logging.Logger
-import com.weesnerDevelopment.lavalamp.resources.randomUUID
+import com.weesnerDevelopment.lavalamp.frontend.resources.randomUUID
 import com.weesnerDevelopment.lavalamp.sdk.Feeling
 import com.weesnerDevelopment.lavalamp.sdk.Project
 import com.weesnerDevelopment.lavalamp.sdk.State

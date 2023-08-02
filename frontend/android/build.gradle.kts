@@ -8,23 +8,24 @@ group = "com.weesnerDevelopment.lavalamp.android"
 version = "1.0-SNAPSHOT"
 
 dependencies {
-    implementation(project(":common:logging"))
-    implementation(project(":frontend:common"))
-    implementation(project(":frontend:compose:core"))
-    implementation(project(":frontend:di"))
-    implementation(project(":frontend:navigation:core"))
-    implementation(project(":frontend:navigation:impl"))
     implementation("androidx.activity:activity-compose:1.5.0")
+
+    implementation(module = ProjectGradleModule.CommonLogging)
+    implementation(module = ProjectGradleModule.FrontendCommon)
+    implementation(module = ProjectGradleModule.FrontendComposeCore)
+    implementation(module = ProjectGradleModule.FrontendDi)
+    implementation(module = ProjectGradleModule.FrontendNavigationCore)
+    implementation(module = ProjectGradleModule.FrontendNavigationImpl)
 }
 
 android {
-    namespace = group.toString()
-    compileSdk = 33
+    namespace = "$group"
+    compileSdk = libs.versions.android.sdk.compile.get().toInt()
     defaultConfig {
         applicationId = group.toString()
         multiDexEnabled = true
-        minSdk = 24
-        targetSdk = 33
+        minSdk = libs.versions.android.sdk.min.get().toInt()
+        targetSdk = libs.versions.android.sdk.target.get().toInt()
         versionCode = 1
         versionName = version.toString()
     }
@@ -32,14 +33,14 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+        targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())
     }
     buildTypes {
         getByName("release") {

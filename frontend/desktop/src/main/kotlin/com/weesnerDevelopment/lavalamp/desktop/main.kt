@@ -6,6 +6,8 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.arkivanov.decompose.DefaultComponentContext
+import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.compose.core.LocalWindowSize
 import com.weesnerDevelopment.lavalamp.di.setupDI
@@ -19,7 +21,12 @@ import org.kodein.di.instance
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 fun main() = application {
     val di: DI by DI.lazy {
-        extend(setupDI(Platform.Desktop))
+        extend(
+            setupDI(
+                platform = Platform.Desktop,
+                componentContext = DefaultComponentContext(LifecycleRegistry())
+            )
+        )
     }
 
     Kimchi.addLog(StandardWriter)

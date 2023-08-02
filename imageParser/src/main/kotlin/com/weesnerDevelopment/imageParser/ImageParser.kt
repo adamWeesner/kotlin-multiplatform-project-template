@@ -86,7 +86,7 @@ private fun generateClasses(fileNames: List<Image>) {
     """.trimIndent()
 
     val new =
-        File("frontend/resources/src/commonMain/kotlin/com/weesnerDevelopment/lavalamp/resources/Image.kt")
+        File("frontend/resources/src/commonMain/kotlin/com/weesnerDevelopment/lavalamp/frontend/resources/Image.kt")
     new.createNewFile()
     new.writeText(classes)
     println("Updated $new")
@@ -156,7 +156,7 @@ private fun parseSvg(data: File) {
     svgData.paths = paths
 
     val new =
-        File("frontend/resources/src/main/res/drawable/${data.nameWithoutExtension.lowercase()}.xml")
+        File("frontend/resources/src/androidMain/res/drawable/${data.nameWithoutExtension.lowercase()}.xml")
     val newFile = new.createNewFile()
 
     new.writeText(svgData.toAndroidXml())

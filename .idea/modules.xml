@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/sdk/lavalamp.common.sdk.commonMain.iml" filepath="$PROJECT_DIR$/.idea/modules/common/sdk/lavalamp.common.sdk.commonMain.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/frontend/desktop/lavalamp.frontend.desktop.main.iml" filepath="$PROJECT_DIR$/.idea/modules/frontend/desktop/lavalamp.frontend.desktop.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/frontend/resources/lavalamp.frontend.resources.main.iml" filepath="$PROJECT_DIR$/.idea/modules/frontend/resources/lavalamp.frontend.resources.main.iml" />
     </modules>
   </component>
 </project>

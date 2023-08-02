@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.CompositionLocalProvider
+import com.arkivanov.decompose.defaultComponentContext
 import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.compose.core.LocalWindowSize
 import com.weesnerDevelopment.lavalamp.di.setupDI
@@ -18,14 +19,19 @@ import org.kodein.di.instance
 
 class MainActivity : AppCompatActivity(), DIAware {
     override val di: DI by DI.lazy {
-        extend(setupDI(Platform.Android))
+        extend(
+            setupDI(
+                platform = Platform.Android,
+                componentContext = defaultComponentContext()
+            )
+        )
     }
-
-    private val rootComponent: RootComponent by di.instance()
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val rootComponent: RootComponent by di.instance()
 
         setContent {
             val windowSize = calculateWindowSizeClass()
