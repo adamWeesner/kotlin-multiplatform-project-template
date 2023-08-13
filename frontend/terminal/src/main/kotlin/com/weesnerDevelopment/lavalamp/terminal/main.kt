@@ -1,5 +1,7 @@
 package com.weesnerDevelopment.lavalamp.terminal
 
+import com.arkivanov.decompose.DefaultComponentContext
+import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.github.ajalt.clikt.core.CliktCommand
 import com.weesnerDevelopment.common.Platform
 import com.weesnerDevelopment.lavalamp.api.project.ProjectRepository
@@ -22,7 +24,7 @@ class Program : CliktCommand(), DIAware {
     private val showLogs = false
 
     override val di: DI by DI.lazy {
-        extend(setupDI(Platform.Terminal))
+        extend(setupDI(Platform.Terminal, DefaultComponentContext(LifecycleRegistry())))
     }
 
     private val rootComponent by instance<RootComponent>()

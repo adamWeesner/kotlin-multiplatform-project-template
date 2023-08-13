@@ -38,6 +38,10 @@ android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    sourceSets {
+        getByName("debug").res.srcDirs("${project.buildDir}/generated/sources/androidMain/res")
+        getByName("release").res.srcDirs("${project.buildDir}/generated/sources/androidMain/res")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
         targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())

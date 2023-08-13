@@ -38,7 +38,6 @@
             <option value="$PROJECT_DIR$/frontend/ui/projectDetails" />
             <option value="$PROJECT_DIR$/frontend/ui/projectDetails/core" />
             <option value="$PROJECT_DIR$/frontend/ui/projectDetails/impl" />
-            <option value="$PROJECT_DIR$/imageParser" />
           </set>
         </option>
       </GradleProjectSettings>

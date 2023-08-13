@@ -50,7 +50,4 @@ include(
     ":common:appwrite",
     ":common:logging",
     ":common:sdk",
-
-    // other
-    ":imageParser",
 )

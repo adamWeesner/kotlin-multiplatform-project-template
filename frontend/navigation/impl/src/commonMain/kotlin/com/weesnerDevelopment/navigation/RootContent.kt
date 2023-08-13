@@ -1,17 +1,16 @@
 package com.weesnerDevelopment.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetScaffoldDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
+import com.weesnerDevelopment.lavalamp.frontend.resources.strings.Strings
 import com.weesnerDevelopment.lavalamp.ui.createProject.CreateProject
 import com.weesnerDevelopment.lavalamp.ui.home.Home
 import com.weesnerDevelopment.lavalamp.ui.projectDetails.ProjectDetails
@@ -30,6 +29,15 @@ fun RootContent(
     BottomSheetScaffold(
         modifier = modifier,
         scaffoldState = rememberBottomSheetScaffoldState(),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = Strings.AppName
+                    )
+                }
+            )
+        },
         sheetPeekHeight = when (bottomSheetSlot.child?.instance) {
             Child.SampleForBottomSheet -> BottomSheetScaffoldDefaults.SheetPeekHeight
             null -> 0.dp

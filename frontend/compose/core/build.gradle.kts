@@ -5,6 +5,9 @@ plugins {
 kotlin {
     sourceSets {
         val commonMain by getting {
+            // gets the generated files and adds them to the app so we can use them everywhere
+            kotlin.srcDirs("${project.buildDir}/generated/sources/commonMain/kotlin/com/weesnerDevelopment/compose/core")
+
             dependencies {
                 api(module = ProjectGradleModule.BackendApi)
                 api(module = ProjectGradleModule.CommonSdk)
@@ -19,6 +22,8 @@ kotlin {
             }
         }
         val androidMain by getting {
+            kotlin.srcDirs("${project.buildDir}/generated/sources/androidMain/kotlin/com/weesnerDevelopment/compose/core")
+
             dependencies {
                 api(compose.preview)
                 api(libs.appcompat)
@@ -26,6 +31,7 @@ kotlin {
             }
         }
         val desktopMain by getting {
+            kotlin.srcDirs("${project.buildDir}/generated/sources/desktopMain/kotlin/com/weesnerDevelopment/compose/core")
             dependencies {
                 api(compose.preview)
             }

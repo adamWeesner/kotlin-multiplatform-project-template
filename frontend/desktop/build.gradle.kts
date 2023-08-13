@@ -28,11 +28,15 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "lavalamp"
+            version = "1.0.0"
             packageVersion = version.toString()
 
             macOS {
                 setDockNameSameAsPackageName = true
             }
+
+            val path = project.layout.projectDirectory.dir("../../resources/build/generated/sources/desktopMain/resources")
+            appResourcesRootDir.set(path)
         }
     }
 }

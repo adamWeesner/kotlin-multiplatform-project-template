@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import com.weesnerDevelopment.common.InputData
-import com.weesnerDevelopment.compose.core.Image
 import com.weesnerDevelopment.compose.core.imagePainter
+import com.weesnerDevelopment.lavalamp.resources.Image
 
 data class IconData(
     val icon: Painter,

@@ -2,6 +2,7 @@ package com.weesnerDevelopment.lavalamp.ui.createProject
 
 import com.arkivanov.decompose.value.Value
 import com.weesnerDevelopment.common.InputData
+import com.weesnerDevelopment.lavalamp.frontend.resources.strings.Strings
 import com.weesnerDevelopment.lavalamp.sdk.Feeling
 
 interface CreateProjectComponent {
@@ -20,8 +21,8 @@ interface CreateProjectComponent {
         val projectName: InputData = InputData(
             value = "",
             errorMessage = {
-                if (it.isEmpty()) "Project name cannot be blank"
-                else "Invalid project name '$it'"
+                if (it.isEmpty()) Strings.BlankProjectName
+                else Strings.InvalidProjectName(it)
             }
         ),
         val notes: InputData = InputData(

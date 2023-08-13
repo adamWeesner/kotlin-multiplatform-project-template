@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.weesnerDevelopment.compose.core.LocalWindowSize
+import com.weesnerDevelopment.lavalamp.frontend.resources.strings.Strings
 import com.weesnerDevelopment.navigation.Config
 import com.weesnerDevelopment.navigation.Navigator
 
@@ -66,14 +67,14 @@ fun Home(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Create a project to get started."
+                    text = Strings.GetStartedMessage
                 )
 
                 Button(
                     onClick = { component.uiAction(HomeComponent.Navigate.CreateProject) }
                 ) {
                     Text(
-                        text = "Create Project"
+                        text = Strings.CreateProject
                     )
                 }
             }
@@ -89,7 +90,7 @@ fun Home(
                     onClick = { component.uiAction(HomeComponent.Navigate.CreateProject) }
                 ) {
                     Text(
-                        text = "Create Project"
+                        text = Strings.CreateProject
                     )
                 }
             }

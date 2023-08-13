@@ -21,6 +21,7 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.weesnerDevelopment.compose.core.LocalWindowSize
 import com.weesnerDevelopment.compose.core.components.ClearIconData
 import com.weesnerDevelopment.compose.core.components.Input
+import com.weesnerDevelopment.lavalamp.frontend.resources.strings.Strings
 import com.weesnerDevelopment.navigation.Navigator
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
@@ -64,7 +65,7 @@ fun CreateProject(
     ) {
         Input(
             modifier = Modifier.padding(top = 8.dp),
-            label = "Project Name",
+            label = Strings.ProjectNameLabel,
             input = state.projectName,
             onValueChange = { component.updateProjectName(it) },
             trailingIcon = ClearIconData(
@@ -75,7 +76,7 @@ fun CreateProject(
 
         Input(
             modifier = Modifier.padding(top = 8.dp),
-            label = "Notes",
+            label = Strings.NotesLabel,
             maxLines = 5,
             input = state.notes,
             onValueChange = { component.updateNotes(it) },
@@ -101,7 +102,11 @@ fun CreateProject(
                         Image(Icons.Default.Check, null)
                     },
                     content = {
-                        Text(text = feeling.name, maxLines = 1, overflow = TextOverflow.Visible)
+                        Text(
+                            text = Strings.FeelingLabel(feeling),
+                            maxLines = 1,
+                            overflow = TextOverflow.Visible
+                        )
                     },
                     onClick = {
                         val selectedFeelings = if (state.feelings.contains(feeling)) {
@@ -117,7 +122,7 @@ fun CreateProject(
 
         Input(
             modifier = Modifier.padding(top = 8.dp),
-            label = "Notes on your feelings",
+            label = Strings.FeelingsNotesLabel,
             maxLines = 5,
             input = state.feelingsNotes,
             onValueChange = { component.updateFeelingsNotes(it) },
@@ -129,7 +134,7 @@ fun CreateProject(
 
         Text(
             modifier = Modifier.padding(top = 8.dp),
-            text = "Effort"
+            text = Strings.EffortLabel
         )
 
         Slider(
@@ -150,7 +155,7 @@ fun CreateProject(
             }
         ) {
             Text(
-                text = "Save"
+                text = Strings.Save
             )
         }
     }
