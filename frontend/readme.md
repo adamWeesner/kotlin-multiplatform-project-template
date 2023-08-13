@@ -11,4 +11,6 @@ simple as copy pasting the `Desktop` Gradle module and renaming things as a jump
 
 ### [Dependency Injection](docs/diReadme.md)
 
-### [Adding an image](../imageParser/readme.md)
+### [Adding an image](docs/addImagesReadMe.md)
+
+### [Adding a string resource](docs/addStringsReadMe.md)

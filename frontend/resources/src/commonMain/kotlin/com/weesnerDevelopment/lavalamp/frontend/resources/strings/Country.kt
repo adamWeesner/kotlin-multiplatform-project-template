@@ -253,6 +253,6 @@ internal enum class Country(val isoCode: String) {
     Zimbabwe("ZWE");
 
     companion object {
-        fun get(code: String) = Country.values().find { it.isoCode == code } ?: Unknown
+        fun get(code: String) = Country.values().find { it.isoCode.lowercase() == code.lowercase() } ?: Unknown
     }
 }

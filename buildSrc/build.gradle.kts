@@ -75,9 +75,11 @@ fun <T : GeneratorTask> T.createTask(
     inputPath: String,
     outputPath: String
 ) {
-    val basePath = ext.get("baseAppPath").toString()
+    val baseAppPath = ext.get("baseAppPath").toString()
+    val name = ext.get("appName").toString()
+    val path = "$baseAppPath/$name"
 
-    basePackage = basePath.replace("/", ".")
+    basePackage = path.replace("/", ".")
 
     input.set(layout.projectDirectory.file(inputPath))
     val outputFile = layout.buildDirectory.file(outputPath)
@@ -233,6 +235,20 @@ abstract class StringsGeneratorTask : GeneratorTask() {
         val inputFile = input.get().asFile
         val outputFile = output.get().asFile
 
+        val variantPath = File(inputFile.parent, "variant")
+        val variants = variantPath.listFiles()?.map {
+            val split = it.name.replace(".kt", "").split("-")
+
+            split[0] to split[1]
+        } ?: emptyList()
+
+        val variantsToItem = variants.map {
+            "country == Country.get(\"${it.second}\") && language == Language.get(\"${it.first}\") -> `${it.first}-${it.second}`"
+        }
+        val variantImport = variants.map {
+            "import $basePackage.frontend.resources.strings.variant.`${it.first}-${it.second}`"
+        }
+
         if (!outputFile.exists()) {
             println("output file for 'Strings.kt' didn't exist; creating...")
             outputFile.parentFile.mkdirs()
@@ -273,7 +289,7 @@ abstract class StringsGeneratorTask : GeneratorTask() {
         val stringsFileData = """
             package $basePackage.frontend.resources.strings
 
-            import $basePackage.frontend.resources.strings.variant.`Eng-USA`
+            ${variantImport.joinToString("\n            ")}
             ${imports.joinToString("\n            ")}
             import java.util.*
 
@@ -293,8 +309,7 @@ abstract class StringsGeneratorTask : GeneratorTask() {
                     val language = Language.get(locale.isO3Language)
 
                     return when {
-                        // add new country/language combinations here
-                        country == Country.UnitedStatesOfAmerica && language == Language.English -> `Eng-USA`
+                        ${variantsToItem.joinToString("\n                    ")}
 
                         else -> {
                             $invalidCombo

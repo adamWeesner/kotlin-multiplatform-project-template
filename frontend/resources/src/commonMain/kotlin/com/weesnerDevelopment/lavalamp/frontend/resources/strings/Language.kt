@@ -189,6 +189,6 @@ internal enum class Language(val isoCode: String) {
     Zulu("zul");
 
     companion object {
-        fun get(code: String) = Language.values().find { it.isoCode == code } ?: Unknown
+        fun get(code: String) = Language.values().find { it.isoCode.lowercase() == code.lowercase() } ?: Unknown
     }
 }
