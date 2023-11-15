@@ -11,7 +11,7 @@ internal object AppwriteProjectRepository : ProjectRepository {
     private val client = Client().apply {
         setSelfSigned(false)
         setEndpoint("https://appwrite.weesnerdevelopment.com/v1")
-        setKey("245f4c9d0a890f221fde45cd0377f24285ba521000f234da97d5c349e24456d432fd2a92750b57d2fcdafd064155683bea0c631ed25028cb4e160d56eaeecdd06306fa5eb4250401fd0bc9d1162965d5874596d32384cdf8860e2a50b7bb22db44321a40bb42cc9821b8b7e5a77d8f32c90bcf90d630f627cb63ff5663321d29")
+        setKey("")
         setProject("lavalamp")
     }
     private val databases = Databases(client)
